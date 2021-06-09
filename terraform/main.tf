@@ -13,7 +13,7 @@ terraform {
 }
 
 resource "aws_iam_role" "aws_backup" {
-  name = "aws_backupOperator"
+  name               = "aws_backupOperator"
   assume_role_policy = <<POLICY
 {
   "Version": "2012-10-17",
@@ -52,9 +52,9 @@ resource "aws_backup_plan" "aws_backup_rpo_6" {
     rule_name         = "aws_backup_rule_rpo_6"
     target_vault_name = aws_backup_vault.aws_backup_vault.name
     schedule          = "cron(0 0,6,12,18 * * ? *)" # runs at 6 AM/PM UTC and 12 AM/PM UTC
-    lifecycle           {
+    lifecycle {
       cold_storage_after = var.cold_storage_after
-      delete_after = var.delete_after
+      delete_after       = var.delete_after
     }
   }
 }
@@ -79,9 +79,9 @@ resource "aws_backup_plan" "aws_backup_rpo_12" {
     rule_name         = "aws_backup_rule_rpo_12"
     target_vault_name = aws_backup_vault.aws_backup_vault.name
     schedule          = "cron(0 0,12 * * ? *)" # runs every 12 hours at 12PM UTC
-    lifecycle           {
+    lifecycle {
       cold_storage_after = var.cold_storage_after
-      delete_after = var.delete_after
+      delete_after       = var.delete_after
     }
   }
 }
@@ -108,7 +108,7 @@ resource "aws_backup_plan" "aws_backup_rpo_24" {
     schedule          = "cron(0 3 * * ? *)" # Runs every 24 hours at 3 AM UTC
     lifecycle           {
       cold_storage_after = var.cold_storage_after
-      delete_after = var.delete_after
+      delete_after       = var.delete_after
     }
   }
 }
@@ -135,7 +135,7 @@ resource "aws_backup_plan" "aws_backup_rpo_weekly" {
     schedule          = "cron(0 12 ? * SUN *)" # runs once a week on Sunday at 12 PM UTC
     lifecycle           {
       cold_storage_after = var.cold_storage_after
-      delete_after = var.delete_after
+      delete_after       = var.delete_after
     }
   }
 }

@@ -106,7 +106,7 @@ resource "aws_backup_plan" "aws_backup_rpo_24" {
     rule_name         = "aws_backup_rule_rpo_24"
     target_vault_name = aws_backup_vault.aws_backup_vault.name
     schedule          = "cron(0 3 * * ? *)" # Runs every 24 hours at 3 AM UTC
-    lifecycle           {
+    lifecycle {
       cold_storage_after = var.cold_storage_after
       delete_after       = var.delete_after
     }
@@ -133,7 +133,7 @@ resource "aws_backup_plan" "aws_backup_rpo_weekly" {
     rule_name         = "aws_backup_rule_rpo_weekly"
     target_vault_name = aws_backup_vault.aws_backup_vault.name
     schedule          = "cron(0 12 ? * SUN *)" # runs once a week on Sunday at 12 PM UTC
-    lifecycle           {
+    lifecycle {
       cold_storage_after = var.cold_storage_after
       delete_after       = var.delete_after
     }

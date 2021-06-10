@@ -3,7 +3,7 @@
 variable "aws_region" {
   description = "Name of AWS region"
   type        = string
-  default     = "us-east-1"
+  default     = "us-west-2"
 }
 
 variable "cold_storage_after" {

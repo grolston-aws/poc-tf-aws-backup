@@ -186,7 +186,7 @@ resource "aws_backup_vault_policy" "vault_policy" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "DenyDelete,
+      "Sid": "DenyDelete",
       "Effect": "Deny",
       "Principal": "*",
       "Action": [

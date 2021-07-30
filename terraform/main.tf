@@ -20,6 +20,10 @@ locals {
 
 resource "aws_iam_role" "aws_backup" {
   name               = "aws_backupOperator"
+  inline_policy {
+    name   = "passRoleForRestore"
+    policy = data.aws_iam_policy_document.inline_policy.json
+  }
   assume_role_policy = <<POLICY
 {
   "Version": "2012-10-17",
@@ -35,17 +39,13 @@ resource "aws_iam_role" "aws_backup" {
 }
 POLICY
 
-  inline_policy {
-    name   = "passRoleForRestore"
-    policy = data.aws_iam_policy_document.inline_policy.json
-  }
 }
 
 data "aws_iam_policy_document" "inline_policy" {
   statement {
     actions   = ["iam:GetRole", "iam:PassRole"]
     effect    = "Allow"
-    resources = ["*"]
+    resources = ["arn:aws:iam::${local.account_id}:role/*"]
   }
 }
 

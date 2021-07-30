@@ -1,7 +1,7 @@
 
 provider "aws" {
   profile = "default"
-  version = "~> 2.42"
+  version = "~> 3.52.0"
   region  = var.aws_region
 }
 ## update backend s3 bucket for state file management

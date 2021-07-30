@@ -1,6 +1,6 @@
 # AWS Backup Demo
 
-The following Terraform-based project delivers the simple baseline backup strategy which leverages tagging to backup resources on a routine basis. The solution can be implemented by simply placing a single tag on the AWS resource supported by AWS Backup. Once the a specified tag is applied, the AWS resource will be backed up according to the `Backup Plan` designation.
+The following Terraform-based project delivers the simple baseline backup strategy which leverages tagging to backup resources on a routine basis. **The solution can be implemented by simply placing a single tag on the AWS resource supported by AWS Backup.** Once the a specified tag is applied, the AWS resource will be backed up according to the `Backup Plan` designation.
 
 > AWS Backup provides a centralized console to automate and manage backups across AWS services. AWS Backup supports Amazon EBS, Amazon RDS, Amazon DynamoDB, Amazon EFS, Amazon FSx, Amazon EC2, and AWS Storage Gateway, to enable you to backup key data stores, such as your storage volumes, databases, and file systems.
 

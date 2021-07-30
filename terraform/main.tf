@@ -4,7 +4,7 @@ provider "aws" {
   version = "~> 2.42"
   region  = var.aws_region
 }
-
+## update backend s3 bucket for state file management
 terraform {
   backend "s3" {
     bucket = "tfstate-workload1"
@@ -36,7 +36,7 @@ resource "aws_iam_role" "aws_backup" {
 POLICY
 
 }
-
+## Policy allows pass role for instance profiles during ec2 restore
 resource "aws_iam_policy" "awsbackup_pass_policy" {
   name = "aws-backup-passrole"
   policy = jsonencode({

@@ -177,3 +177,24 @@ resource "aws_backup_selection" "Rpo_Weekly" {
     value = "Weekly"
   }
 }
+
+resource "aws_backup_vault_policy" "vault_policy" {
+  backup_vault_name = aws_backup_vault.aws_backup_vault.name
+
+  policy = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyDelete,
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": [
+        "backup:DeleteBackupVault"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+POLICY
+}

@@ -35,20 +35,17 @@ resource "aws_iam_role" "aws_backup" {
 POLICY
 
   inline_policy {
-    name = "passRoleForRestore"
-
-    policy = jsonencode({
-      Version = "2012-10-17"
-      Statement = [
-        {
-          Action   = ["iam:GetRole", "iam:PassRole"]
-          Effect   = "Allow"
-          Resource = "arn:aws:iam::${local.account_id}:role/*"
-        },
-      ]
-    })
+    name   = "passRoleForRestore"
+    policy = data.aws_iam_policy_document.inline_policy.json
   }
+}
 
+data "aws_iam_policy_document" "inline_policy" {
+  statement {
+    actions   = ["iam:GetRole", "iam:PassRole"]
+    effect    = "Allow"
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "aws_backup_role_policy" {

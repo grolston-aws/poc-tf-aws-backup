@@ -1,3 +1,4 @@
+
 provider "aws" {
   profile = "default"
   version = "~> 2.42"
@@ -10,6 +11,10 @@ terraform {
     key    = "workload1-awsbackup/terraform.tfstate"
     region = "us-west-2"
   }
+}
+
+locals {
+    account_id = data.aws_caller_identity.current.account_id
 }
 
 resource "aws_iam_role" "aws_backup" {
@@ -28,6 +33,22 @@ resource "aws_iam_role" "aws_backup" {
   ]
 }
 POLICY
+
+  inline_policy {
+    name = "passRoleForRestore"
+
+    policy = jsonencode({
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Action   = ["iam:GetRole", "iam:PassRole"]
+          Effect   = "Allow"
+          Resource = "arn:aws:iam::${local.account_id}:role/*"
+        },
+      ]
+    })
+  }
+
 }
 
 resource "aws_iam_role_policy_attachment" "aws_backup_role_policy" {

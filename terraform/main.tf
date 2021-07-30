@@ -19,11 +19,12 @@ locals {
 }
 
 resource "aws_iam_role" "aws_backup" {
-  name               = "aws_backupOperator"
+  name = "aws_backupOperator"
   inline_policy {
     name   = "passRoleForRestore"
     policy = data.aws_iam_policy_document.inline_policy.json
   }
+
   assume_role_policy = <<POLICY
 {
   "Version": "2012-10-17",
